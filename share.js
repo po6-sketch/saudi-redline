@@ -1,28 +1,50 @@
 document.querySelector("#shareForm").addEventListener("submit", async e => {
   e.preventDefault();
-  const form=e.currentTarget, btn=form.querySelector('button[type="submit"]');
-  const name=document.querySelector("#shareName").value.trim() || "مشاركة وطنية";
-  const message=document.querySelector("#shareMessage").value.trim();
-  const file=document.querySelector("#shareImage").files[0];
-  const notice=document.querySelector("#shareNotice");
-  if(file && (!file.type.startsWith("image/") || file.size>2*1024*1024)){
-    alert("يرجى اختيار صورة لا يتجاوز حجمها 2 ميجابايت."); return;
+
+  const form = e.currentTarget;
+  const btn = form.querySelector('button[type="submit"]');
+  const name =
+    document.querySelector("#shareName").value.trim() || "مشاركة وطنية";
+  const message = document.querySelector("#shareMessage").value.trim();
+  const notice = document.querySelector("#shareNotice");
+
+  if (!message) {
+    alert("يرجى كتابة رسالتك الوطنية.");
+    return;
   }
-  btn.disabled=true; btn.textContent="جارٍ الإرسال...";
+
+  btn.disabled = true;
+  btn.textContent = "جارٍ الإرسال...";
+  notice.hidden = true;
+
   try {
-    let imageUrl="";
-    const ref=db.collection("participations").doc();
-    if(file){
-      const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-      const fileRef=storage.ref(`participation-images/${ref.id}/${safeName}`);
-      const snap=await fileRef.put(file,{contentType:file.type});
-      imageUrl=await snap.ref.getDownloadURL();
+    if (typeof db === "undefined") {
+      throw new Error("Firestore غير مهيأ.");
     }
-    await ref.set({name,message,imageUrl,status:"pending",createdAt:firebase.firestore.FieldValue.serverTimestamp()});
-    form.reset(); notice.hidden=false;
-    notice.textContent="وصلت مشاركتك للمراجعة بنجاح، وستظهر في الجدارية بعد اعتمادها.";
-  } catch(err) {
-    console.error(err); notice.hidden=false;
-    notice.textContent="تعذر إرسال المشاركة. تأكدي من إعداد Firestore وStorage وقواعد الحماية، ثم حاولي مجددًا.";
-  } finally {btn.disabled=false;btn.textContent="إرسال للمراجعة ♡";}
+
+    await db.collection("participations").add({
+      name: name,
+      message: message,
+      imageUrl: "",
+      status: "pending",
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    form.reset();
+
+    notice.hidden = false;
+    notice.textContent =
+      "وصلت مشاركتك للمراجعة بنجاح، وستظهر في الجدارية بعد اعتمادها.";
+
+  } catch (err) {
+    console.error("خطأ في إرسال المشاركة:", err);
+
+    notice.hidden = false;
+    notice.textContent =
+      "تعذر إرسال المشاركة. تحققي من اتصال الموقع بقاعدة البيانات وقواعد الحماية، ثم حاولي مجددًا.";
+
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "إرسال للمراجعة ♡";
+  }
 });
