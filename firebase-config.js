@@ -21,11 +21,8 @@ const ADMIN_EMAIL = "so70.90p@gmail.com";
 
 // التحقق من حساب المسؤولة والبريد الموثق
 const isAdmin = () => {
-  const user = auth.currentUser;
-
-  return !!user
-    && user.email === ADMIN_EMAIL
-    && user.emailVerified === true;
+  return !!auth.currentUser
+    && auth.currentUser.email === ADMIN_EMAIL;
 };
 
 // عرض معلومات تشخيصية بعد تحميل الملف
