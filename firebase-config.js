@@ -7,9 +7,34 @@ const firebaseConfig = {
   appId: "1:601535027952:web:43cb40cc0bc0ef3410c035",
   measurementId: "G-60YGDVBF4P"
 };
-firebase.initializeApp(firebaseConfig);
+
+// تهيئة Firebase مرة واحدة
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 const db = firebase.firestore();
 const storage = firebase.storage();
 const auth = firebase.auth();
+
 const ADMIN_EMAIL = "so70.90p@gmail.com";
-const isAdmin = () => !!auth.currentUser && auth.currentUser.email === ADMIN_EMAIL;
+
+// التحقق من حساب المسؤولة والبريد الموثق
+const isAdmin = () => {
+  const user = auth.currentUser;
+
+  return !!user
+    && user.email === ADMIN_EMAIL
+    && user.emailVerified === true;
+};
+
+// عرض معلومات تشخيصية بعد تحميل الملف
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log("Admin email:", user.email);
+    console.log("Email verified:", user.emailVerified);
+    console.log("Is admin:", isAdmin());
+  } else {
+    console.log("No user signed in.");
+  }
+});
