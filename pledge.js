@@ -1,22 +1,29 @@
-document.querySelector("#pledgeForm").addEventListener("submit", async e => {
+document.querySelector("#pledgeForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const name = document.querySelector("#participantName").value.trim();
-  if (!name || !document.querySelector("#pledgeAgree").checked) return;
+  const agree = document.querySelector("#pledgeAgree").checked;
+
+  if (!name || !agree) {
+    alert("اكتبي اسمك ووافقي على التعهد أولًا.");
+    return;
+  }
 
   const btn = e.currentTarget.querySelector('button[type="submit"]');
   btn.disabled = true;
 
   try {
     await db.collection("pledges").add({
-      name: name,
+      name,
       status: "approved",
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
     document.querySelector("#certName").textContent = name;
-    document.querySelector("#certificate").hidden = false;
-    document.querySelector("#certificate").scrollIntoView({
+
+    const certificate = document.querySelector("#certificate");
+    certificate.hidden = false;
+    certificate.scrollIntoView({
       behavior: "smooth",
       block: "center"
     });
@@ -25,8 +32,8 @@ document.querySelector("#pledgeForm").addEventListener("submit", async e => {
 
     alert("تم تسجيل تعهدك بنجاح! شكرًا لمشاركتك في مبادرة السعودية خط أحمر 🇸🇦");
 
-  } catch (err) {
-    console.error("خطأ في حفظ التعهد:", err);
+  } catch (error) {
+    console.error("خطأ في حفظ التعهد:", error);
     alert("تعذر حفظ التعهد. يرجى المحاولة مرة أخرى.");
   } finally {
     btn.disabled = false;
