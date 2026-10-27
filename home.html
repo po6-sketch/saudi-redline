@@ -31,10 +31,9 @@
 
 <main>
 
-  <!-- الواجهة الرئيسية -->
   <section class="hero home-hero">
-
     <div class="hero-copy">
+
       <div class="eyebrow">
         <span class="pulse"></span>
         أهلًا بك في مبادرتنا الوطنية
@@ -55,6 +54,7 @@
         <span>مديرة المدرسة</span>
         <b>جليلة العتيبي</b>
       </div>
+
     </div>
 
     <div class="hero-visual">
@@ -68,7 +68,6 @@
         </div>
       </div>
     </div>
-
   </section>
 
   <!-- إحصائيات المبادرة -->
@@ -105,9 +104,7 @@
 
     <div class="section-heading">
       <span class="eyebrow">رحلتنا الوطنية</span>
-
       <h2>اختاري محطتك.. <em>وأثرك يبقى</em></h2>
-
       <p>
         كل قسم يفتح في صفحة مستقلة، ويمكنك الرجوع للرئيسية من القائمة.
       </p>
@@ -185,56 +182,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 
-<!-- إعدادات الموقع -->
+<!-- إعدادات Firebase وملف العدادات -->
 <script src="firebase-config.js"></script>
 <script src="common.js"></script>
-
-<!-- تحديث الأعداد من قاعدة البيانات -->
-<script>
-(function () {
-  function startCounters() {
-    if (typeof db === "undefined") {
-      console.error("Firebase Firestore غير مهيأ. راجعي firebase-config.js");
-      return;
-    }
-
-    const pledgeCount = document.getElementById("pledgeCount");
-    const messageCount = document.getElementById("messageCount");
-
-    function formatNumber(number) {
-      return number.toLocaleString("ar-SA");
-    }
-
-    // عدد التعهدات المحفوظة في قاعدة البيانات
-    db.collection("pledges").onSnapshot(
-      function (snapshot) {
-        pledgeCount.textContent = formatNumber(snapshot.size);
-      },
-      function (error) {
-        console.error("تعذر تحميل عدد التعهدات:", error);
-      }
-    );
-
-    // عدد الرسائل المعتمدة
-    db.collection("participations")
-      .where("status", "==", "approved")
-      .onSnapshot(
-        function (snapshot) {
-          messageCount.textContent = formatNumber(snapshot.size);
-        },
-        function (error) {
-          console.error("تعذر تحميل عدد الرسائل:", error);
-        }
-      );
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startCounters);
-  } else {
-    startCounters();
-  }
-})();
-</script>
 
 </body>
 </html>
