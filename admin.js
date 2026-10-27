@@ -91,9 +91,17 @@ loginForm.addEventListener("submit", async event => {
     await auth.signInWithEmailAndPassword(email, password);
 
     if (!isAdmin()) {
-      await auth.signOut();
-      throw new Error("البريد المسجل ليس البريد المحدد للمسؤولة.");
-    }
+  const currentEmail = auth.currentUser
+    ? auth.currentUser.email
+    : "لا يوجد مستخدم مسجل";
+
+  await auth.signOut();
+
+  throw new Error(
+    "البريد الحالي: " + currentEmail +
+    " — البريد المطلوب: " + ADMIN_EMAIL
+  );
+}
 
     loginForm.querySelector('button[type="submit"]').hidden = true;
     logout.hidden = false;
