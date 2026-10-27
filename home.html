@@ -1,4 +1,240 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>الرئيسية | السعودية خط أحمر</title><link rel="stylesheet" href="style.css"></head><body><header class="topbar"><a class="brand" href="home.html"><span class="brand-mark">🇸🇦</span><span><strong>السعودية خط أحمر</strong><small>مدرسة شقصان للطفولة المبكرة</small></span></a><button class="menu-toggle" id="menuToggle">☰</button><nav id="mainNav"><a href="home.html">الرئيسية</a><a href="pledge.html">وثيقة العهد</a><a href="rumors.html">أصد الشائعات</a><a href="share.html">شاركينا حبك</a><a href="wall.html">جدارية الوطن</a></nav></header><main>
-<section class="hero home-hero"><div class="hero-copy"><div class="eyebrow"><span class="pulse"></span> أهلًا بك في مبادرتنا الوطنية</div><h1>السعودية<br><em>خط أحمر</em></h1><p class="hero-lead">وطنٌ نفخر به، ووعيٌ نحميه، وعهدٌ نجدد فيه الولاء والانتماء.</p><p class="school-line">مدرسة شقصان للطفولة المبكرة</p><div class="signature"><span>رائدة النشاط</span><b>هيلة الربيعي</b><i></i><span>مديرة المدرسة</span><b>جليلة العتيبي</b></div></div><div class="hero-visual"><div class="seal-wrap"><div class="seal-ring">عهد • ولاء • انتماء</div><div class="seal seal-static"><span class="seal-crown">✦</span><strong>وطن<br>نحميه</strong><small>وعي • ولاء • مسؤولية</small></div></div></div></section>
-<section class="stats"><div><span class="stat-icon">📜</span><strong id="pledgeCount">٠</strong><small>وثيقة عهد محفوظة</small></div><div><span class="stat-icon">💚</span><strong id="messageCount">٠</strong><small>رسالة معتمدة</small></div><div><span class="stat-icon">🖼️</span><strong id="imageCount">٠</strong><small>صورة معتمدة</small></div><div><span class="stat-icon">🛡️</span><strong>٣</strong><small>محطات للمبادرة</small></div></section>
-<section class="section"><div class="section-heading"><span class="eyebrow">رحلتنا الوطنية</span><h2>اختاري محطتك.. <em>وأثرك يبقى</em></h2><p>كل قسم يفتح في صفحة مستقلة، ويمكنك الرجوع للرئيسية من القائمة.</p></div><div class="mission-grid"><a class="mission-card" href="pledge.html"><span class="mission-number">01</span><span class="mission-icon">📜</span><h3>وثيقة العهد</h3><p>جددي عهد الولاء والانتماء من خلال وثيقة تحمل اسمك.</p><span class="card-link">افتحي القسم ←</span></a><a class="mission-card" href="rumors.html"><span class="mission-number">02</span><span class="mission-icon">🛡️</span><h3>أصد الشائعات</h3><p>تعرّفي على خطوات التحقق من الأخبار قبل تداولها.</p><span class="card-link">افتحي القسم ←</span></a><a class="mission-card" href="share.html"><span class="mission-number">03</span><span class="mission-icon">💚</span><h3>شاركينا حبك</h3><p>أرسلي رسالة وطنية أو صورة تعبّر عن حبك للوطن.</p><span class="card-link">افتحي القسم ←</span></a><a class="mission-card" href="wall.html"><span class="mission-number">04</span><span class="mission-icon">🖼️</span><h3>جدارية الوطن</h3><p>شاهدي المشاركات التي تمت الموافقة عليها في هذا المتصفح.</p><span class="card-link">شاهدي الجدارية ←</span></a><a class="mission-card" href="certificate.html"><span class="mission-number">05</span><span class="mission-icon">🏅</span><h3>وثيقتي المختومة</h3><p>اعرضي آخر وثيقة عهد أنشأتِها على هذا الجهاز.</p><span class="card-link">افتحي الوثيقة ←</span></a><a class="mission-card" href="admin.html"><span class="mission-number">06</span><span class="mission-icon">🗂️</span><h3>مراجعة المشاركات</h3><p>لوحة تجريبية لمراجعة المشاركات محليًا.</p><span class="card-link">فتح اللوحة ←</span></a></div></section></main><footer><div class="footer-brand">🇸🇦 السعودية خط أحمر</div><p>مدرسة شقصان للطفولة المبكرة</p><div class="footer-names">رائدة النشاط: هيلة الربيعي <span>•</span> مديرة المدرسة: جليلة العتيبي</div></footer><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script><script src="firebase-config.js"></script><script src="common.js"></script></body></html>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الرئيسية | السعودية خط أحمر</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <a class="brand" href="home.html">
+    <span class="brand-mark">🇸🇦</span>
+    <span>
+      <strong>السعودية خط أحمر</strong>
+      <small>مدرسة شقصان للطفولة المبكرة</small>
+    </span>
+  </a>
+
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  <nav id="mainNav">
+    <a href="home.html">الرئيسية</a>
+    <a href="pledge.html">وثيقة العهد</a>
+    <a href="rumors.html">أصد الشائعات</a>
+    <a href="share.html">شاركينا حبك</a>
+    <a href="wall.html">جدارية الوطن</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- الواجهة الرئيسية -->
+  <section class="hero home-hero">
+
+    <div class="hero-copy">
+      <div class="eyebrow">
+        <span class="pulse"></span>
+        أهلًا بك في مبادرتنا الوطنية
+      </div>
+
+      <h1>السعودية<br><em>خط أحمر</em></h1>
+
+      <p class="hero-lead">
+        وطنٌ نفخر به، ووعيٌ نحميه، وعهدٌ نجدد فيه الولاء والانتماء.
+      </p>
+
+      <p class="school-line">مدرسة شقصان للطفولة المبكرة</p>
+
+      <div class="signature">
+        <span>رائدة النشاط</span>
+        <b>هيلة الربيعي</b>
+        <i></i>
+        <span>مديرة المدرسة</span>
+        <b>جليلة العتيبي</b>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="seal-wrap">
+        <div class="seal-ring">عهد • ولاء • انتماء</div>
+
+        <div class="seal seal-static">
+          <span class="seal-crown">✦</span>
+          <strong>وطن<br>نحميه</strong>
+          <small>وعي • ولاء • مسؤولية</small>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- إحصائيات المبادرة -->
+  <section class="stats">
+
+    <div>
+      <span class="stat-icon">📜</span>
+      <strong id="pledgeCount">٠</strong>
+      <small>وثيقة عهد محفوظة</small>
+    </div>
+
+    <div>
+      <span class="stat-icon">💚</span>
+      <strong id="messageCount">٠</strong>
+      <small>رسالة معتمدة</small>
+    </div>
+
+    <div>
+      <span class="stat-icon">🇸🇦</span>
+      <strong>١</strong>
+      <small>وطن واحد يجمعنا</small>
+    </div>
+
+    <div>
+      <span class="stat-icon">🛡️</span>
+      <strong>٣</strong>
+      <small>محطات للمبادرة</small>
+    </div>
+
+  </section>
+
+  <!-- أقسام المبادرة -->
+  <section class="section">
+
+    <div class="section-heading">
+      <span class="eyebrow">رحلتنا الوطنية</span>
+
+      <h2>اختاري محطتك.. <em>وأثرك يبقى</em></h2>
+
+      <p>
+        كل قسم يفتح في صفحة مستقلة، ويمكنك الرجوع للرئيسية من القائمة.
+      </p>
+    </div>
+
+    <div class="mission-grid">
+
+      <a class="mission-card" href="pledge.html">
+        <span class="mission-number">01</span>
+        <span class="mission-icon">📜</span>
+        <h3>وثيقة العهد</h3>
+        <p>جددي عهد الولاء والانتماء من خلال وثيقة تحمل اسمك.</p>
+        <span class="card-link">افتحي القسم ←</span>
+      </a>
+
+      <a class="mission-card" href="rumors.html">
+        <span class="mission-number">02</span>
+        <span class="mission-icon">🛡️</span>
+        <h3>أصد الشائعات</h3>
+        <p>تعرّفي على خطوات التحقق من الأخبار قبل تداولها.</p>
+        <span class="card-link">افتحي القسم ←</span>
+      </a>
+
+      <a class="mission-card" href="share.html">
+        <span class="mission-number">03</span>
+        <span class="mission-icon">💚</span>
+        <h3>شاركينا حبك</h3>
+        <p>أرسلي رسالة وطنية تعبّر عن حبك للوطن.</p>
+        <span class="card-link">افتحي القسم ←</span>
+      </a>
+
+      <a class="mission-card" href="wall.html">
+        <span class="mission-number">04</span>
+        <span class="mission-icon">🇸🇦</span>
+        <h3>جدارية الوطن</h3>
+        <p>شاهدي المشاركات الوطنية المعتمدة.</p>
+        <span class="card-link">شاهدي الجدارية ←</span>
+      </a>
+
+      <a class="mission-card" href="certificate.html">
+        <span class="mission-number">05</span>
+        <span class="mission-icon">🏅</span>
+        <h3>وثيقتي المختومة</h3>
+        <p>اعرضي آخر وثيقة عهد أنشأتِها على هذا الجهاز.</p>
+        <span class="card-link">افتحي الوثيقة ←</span>
+      </a>
+
+      <a class="mission-card" href="admin.html">
+        <span class="mission-number">06</span>
+        <span class="mission-icon">🗂️</span>
+        <h3>مراجعة المشاركات</h3>
+        <p>لوحة إدارة المشاركات.</p>
+        <span class="card-link">فتح اللوحة ←</span>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-brand">🇸🇦 السعودية خط أحمر</div>
+  <p>مدرسة شقصان للطفولة المبكرة</p>
+
+  <div class="footer-names">
+    رائدة النشاط: هيلة الربيعي
+    <span>•</span>
+    مديرة المدرسة: جليلة العتيبي
+  </div>
+</footer>
+
+<!-- مكتبات Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+
+<!-- إعدادات الموقع -->
+<script src="firebase-config.js"></script>
+<script src="common.js"></script>
+
+<!-- تحديث الأعداد من قاعدة البيانات -->
+<script>
+(function () {
+  function startCounters() {
+    if (typeof db === "undefined") {
+      console.error("Firebase Firestore غير مهيأ. راجعي firebase-config.js");
+      return;
+    }
+
+    const pledgeCount = document.getElementById("pledgeCount");
+    const messageCount = document.getElementById("messageCount");
+
+    function formatNumber(number) {
+      return number.toLocaleString("ar-SA");
+    }
+
+    // عدد التعهدات المحفوظة في قاعدة البيانات
+    db.collection("pledges").onSnapshot(
+      function (snapshot) {
+        pledgeCount.textContent = formatNumber(snapshot.size);
+      },
+      function (error) {
+        console.error("تعذر تحميل عدد التعهدات:", error);
+      }
+    );
+
+    // عدد الرسائل المعتمدة
+    db.collection("participations")
+      .where("status", "==", "approved")
+      .onSnapshot(
+        function (snapshot) {
+          messageCount.textContent = formatNumber(snapshot.size);
+        },
+        function (error) {
+          console.error("تعذر تحميل عدد الرسائل:", error);
+        }
+      );
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startCounters);
+  } else {
+    startCounters();
+  }
+})();
+</script>
+
+</body>
+</html>
