@@ -1,1 +1,28 @@
-const KEY="saudiRedlineMulti_v1";function get(){try{return JSON.parse(localStorage.getItem(KEY))||{pledges:[],submissions:[],approved:[]}}catch{return{pledges:[],submissions:[],approved:[]}}}function save(s){localStorage.setItem(KEY,JSON.stringify(s))}document.querySelector("#shareForm").addEventListener("submit",async e=>{e.preventDefault();const msg=document.querySelector("#shareMessage").value.trim(),file=document.querySelector("#shareImage").files[0];if(file&&file.size>2*1024*1024){alert("حجم الصورة أكبر من 2 ميجابايت في النسخة التجريبية.");return}let imageData="";if(file)imageData=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});const s=get();s.submissions.push({id:String(Date.now()),name:document.querySelector("#shareName").value.trim()||"مشاركة وطنية",message:msg,imageData,date:new Date().toISOString(),status:"pending"});save(s);document.querySelector("#shareForm").reset();const n=document.querySelector("#shareNotice");n.hidden=false;n.textContent="وصلت مشاركتك إلى قائمة المراجعة على هذا الجهاز. ستظهر في الجدارية بعد اعتمادها."});
+document.querySelector("#shareForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const form=e.currentTarget, btn=form.querySelector('button[type="submit"]');
+  const name=document.querySelector("#shareName").value.trim() || "مشاركة وطنية";
+  const message=document.querySelector("#shareMessage").value.trim();
+  const file=document.querySelector("#shareImage").files[0];
+  const notice=document.querySelector("#shareNotice");
+  if(file && (!file.type.startsWith("image/") || file.size>2*1024*1024)){
+    alert("يرجى اختيار صورة لا يتجاوز حجمها 2 ميجابايت."); return;
+  }
+  btn.disabled=true; btn.textContent="جارٍ الإرسال...";
+  try {
+    let imageUrl="";
+    const ref=db.collection("participations").doc();
+    if(file){
+      const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+      const fileRef=storage.ref(`participation-images/${ref.id}/${safeName}`);
+      const snap=await fileRef.put(file,{contentType:file.type});
+      imageUrl=await snap.ref.getDownloadURL();
+    }
+    await ref.set({name,message,imageUrl,status:"pending",createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+    form.reset(); notice.hidden=false;
+    notice.textContent="وصلت مشاركتك للمراجعة بنجاح، وستظهر في الجدارية بعد اعتمادها.";
+  } catch(err) {
+    console.error(err); notice.hidden=false;
+    notice.textContent="تعذر إرسال المشاركة. تأكدي من إعداد Firestore وStorage وقواعد الحماية، ثم حاولي مجددًا.";
+  } finally {btn.disabled=false;btn.textContent="إرسال للمراجعة ♡";}
+});

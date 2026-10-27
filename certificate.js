@@ -1,1 +1,4 @@
-const KEY="saudiRedlineMulti_v1";let s;try{s=JSON.parse(localStorage.getItem(KEY))||{pledges:[]}}catch{s={pledges:[]}}const last=s.pledges&&s.pledges.length?s.pledges[s.pledges.length-1]:null;if(last){document.querySelector("#certName").textContent=last.name;document.querySelector("#certBody").textContent="أن أكون مواطنة واعية، أعتز بوطني وقيادته، وأحافظ على وحدته وأمنه، وأتحقق من المعلومات قبل نشرها، وأسهم في نشر الوعي والمسؤولية."}
+const name=sessionStorage.getItem("saudiRedlineLastPledge");
+const el=document.querySelector("#certName");
+const body=document.querySelector("#certBody");
+if(name){el.textContent=name;body.textContent="أن أكون مواطنة واعية، أعتز بوطني وقيادته، وأحافظ على وحدته وأمنه، وأتحقق من المعلومات قبل نشرها، وأسهم في نشر الوعي والمسؤولية.";}
